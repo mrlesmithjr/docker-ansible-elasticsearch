@@ -1,0 +1,58 @@
+---
+- hosts: localhost
+  connection: local
+  become: true
+  vars:
+    - gosu_ver: 1.9
+  tasks:
+    - name: Installing apt-transport-https
+      apt:
+        name: "apt-transport-https"
+        state: "present"
+
+    - name: Installing ca-certificates
+      apt:
+        name: "ca-certificates"
+        state: "latest"
+
+    - name: Installing dumb-init
+      apt:
+        deb: "https://github.com/Yelp/dumb-init/releases/download/v1.0.2/dumb-init_1.0.2_amd64.deb"
+
+    - name: Installing gosu
+      get_url:
+        url: "https://github.com/tianon/gosu/releases/download/{{ gosu_ver }}/gosu-amd64"
+        dest: "/usr/local/bin/gosu"
+        mode: 0755
+
+    - name: Installing JRE
+      apt:
+        name: "default-jre-headless"
+        state: "present"
+
+    - name: Adding Elasticsearch Repo Key
+      apt_key:
+        url: "https://packages.elastic.co/GPG-KEY-elasticsearch"
+        state: "present"
+
+    - name: Adding Elasticsearch Repo
+      apt_repository:
+        repo: "deb https://packages.elastic.co/elasticsearch/2.x/debian stable main"
+
+    - name: Installing Elasticsearch
+      apt:
+        name: "elasticsearch"
+        state: "present"
+        install_recommends: no
+
+    - name: Ensuring Elasticsearch Folders Exist
+      file:
+        path: "/usr/share/elasticsearch/{{ item }}"
+        state: "directory"
+        owner: "elasticsearch"
+        group: "elasticsearch"
+      with_items:
+        - 'data'
+        - 'logs'
+        - 'config'
+        - 'config/scripts'
