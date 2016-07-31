@@ -17,7 +17,7 @@ docker run -d -p 9200:9200 mrlesmithjr/elasticsearch
 ```
 `Define volume for persistent storage`
 ```
-docker run -d -v ./data:/usr/share/elasticsearch/data -p 9200:9200 mrlesmithjr/elasticsearch
+docker run -d -v $PWD/.data:/usr/share/elasticsearch/data -p 9200:9200 mrlesmithjr/elasticsearch
 ```
 
 Defining startup values
