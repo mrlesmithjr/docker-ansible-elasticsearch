@@ -3,6 +3,7 @@
   connection: local
   become: true
   vars:
+    - elasticsearch_ver: 2.3.4
     - gosu_ver: 1.9
   tasks:
     - name: Installing apt-transport-https
@@ -41,7 +42,7 @@
 
     - name: Installing Elasticsearch
       apt:
-        name: "elasticsearch"
+        name: "elasticsearch={{ elasticsearch_ver }}"
         state: "present"
         install_recommends: no
 
