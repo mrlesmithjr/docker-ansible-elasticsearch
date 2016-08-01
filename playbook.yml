@@ -4,7 +4,7 @@
   become: true
   vars:
     - elasticsearch_major_version: '1.7'
-    - elasticsearch_ver: '1.7.3'
+    - elasticsearch_ver: '1.7.2'
     - gosu_ver: '1.9'
   tasks:
     - name: Installing apt-transport-https
