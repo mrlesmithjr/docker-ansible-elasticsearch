@@ -38,7 +38,7 @@
 
     - name: Adding Elasticsearch Repo
       apt_repository:
-        repo: "deb https://packages.elastic.co/elasticsearch/2.x/debian stable main"
+        repo: "deb https://packages.elastic.co/elasticsearch/1.7/debian stable main"
 
     - name: Installing Elasticsearch
       apt:
