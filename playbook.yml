@@ -3,7 +3,7 @@
   connection: local
   become: true
   vars:
-    - elasticsearch_ver: 2.2.2
+    - elasticsearch_ver: 2.2.1
     - gosu_ver: 1.9
   tasks:
     - name: Installing apt-transport-https
