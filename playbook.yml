@@ -3,8 +3,9 @@
   connection: local
   become: true
   vars:
-    - elasticsearch_ver: 1.7.5
-    - gosu_ver: 1.9
+    - elasticsearch_major_version: '1.7'
+    - elasticsearch_ver: '1.7.5'
+    - gosu_ver: '1.9'
   tasks:
     - name: Installing apt-transport-https
       apt:
@@ -38,7 +39,7 @@
 
     - name: Adding Elasticsearch Repo
       apt_repository:
-        repo: "deb https://packages.elastic.co/elasticsearch/1.7/debian stable main"
+        repo: "deb https://packages.elastic.co/elasticsearch/{{ elasticsearch_major_version }}/debian stable main"
 
     - name: Installing Elasticsearch
       apt:
