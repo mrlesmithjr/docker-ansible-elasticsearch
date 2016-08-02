@@ -31,6 +31,13 @@ docker run -d -p 9200:9200 mrlesmithjr/elasticsearch -Des.node.name="node0"
 docker run -d -p 9200:9200 mrlesmithjr/elasticsearch -Des.cluster.name="docker"
 ```
 
+Installing Elasticsearch plugins
+
+`royrusso/elasticsearch-HQ`
+```
+docker exec containername plugin install royrusso/elasticsearch-HQ
+```
+
 License
 -------
 
