@@ -3,8 +3,11 @@ services:
   elasticsearch:
     image: mrlesmithjr/elasticsearch:latest
     volumes:
-      - "./.data:/usr/share/elasticsearch/data"
+      - "elasticsearch:/usr/share/elasticsearch/data"
     ports:
       - "9200:9200"
       - "9300:9300"
     restart: always
+
+volumes:
+  elasticsearch:
