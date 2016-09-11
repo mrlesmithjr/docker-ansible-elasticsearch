@@ -2,32 +2,32 @@ FROM mrlesmithjr/ubuntu-ansible:14.04
 
 MAINTAINER Larry Smith Jr. <mrlesmithjr@gmail.com>
 
-# Copy Ansible Playbook
-COPY playbook.yml /playbook.yml
+# Define Elasticsearch version to install
+ENV ELASTICSEARCH_MAJOR_VERSION="2.x" \
+    ELASTICSEARCH_VER="2.4.0"
+
+# Copy Ansible Related Files
+COPY config/ansible/ /
 
 # Run Ansible playbook
-RUN ansible-playbook -i "localhost," -c local /playbook.yml
-
-# Cleanup
-RUN apt-get -y clean && \
-    apt-get -y autoremove && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN ansible-playbook -i "localhost," -c local /playbook.yml \
+  --extra-vars "elasticsearch_major_version=$ELASTICSEARCH_MAJOR_VERSION \
+  elasticsearch_ver=$ELASTICSEARCH_VER" && \
+  apt-get -y clean && \
+  apt-get -y autoremove && \
+  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ENV PATH /usr/share/elasticsearch/bin:$PATH
 
 WORKDIR /usr/share/elasticsearch
 
-# Setup entrypoint Ansible Playbook
-COPY docker-entrypoint.yml /docker-entrypoint.yml
+# Copy Docker Entrypoint
+COPY docker-entrypoint.sh /
+RUN chmod +x /docker-entrypoint.sh
 
-# Setup entrypoint script
-COPY docker-entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
-RUN ln -s usr/local/bin/docker-entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/docker-entrypoint.sh"]
 
-ENTRYPOINT ["docker-entrypoint.sh"]
-
-COPY config /usr/share/elasticsearch/config
+COPY config/elasticsearch /usr/share/elasticsearch/config
 
 # Setup volume
 VOLUME /usr/share/elasticsearch/data
