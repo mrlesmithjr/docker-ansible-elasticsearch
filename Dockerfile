@@ -1,4 +1,4 @@
-FROM mrlesmithjr/alpine-ansible
+FROM mrlesmithjr/alpine-ansible-java
 
 MAINTAINER Larry Smith Jr. <mrlesmithjr@gmail.com>
 

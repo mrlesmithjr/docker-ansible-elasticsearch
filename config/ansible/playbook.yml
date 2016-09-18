@@ -35,11 +35,6 @@
         path: "/usr/local/lib"
         state: "directory"
 
-    - name: Installing JRE
-      apk:
-        name: "openjdk8-jre"
-        state: "present"
-
     - name: Checking For Elasticsearch User
       shell: "cut -d: -f1 /etc/passwd"
       register: "users_list"
