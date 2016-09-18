@@ -1,25 +1,22 @@
-FROM mrlesmithjr/ubuntu-ansible:14.04
+FROM mrlesmithjr/alpine-ansible
 
 MAINTAINER Larry Smith Jr. <mrlesmithjr@gmail.com>
+
+# Copy Ansible Related Files
+COPY config/ansible/ /
 
 # Define Elasticsearch version to install
 ENV ELASTICSEARCH_MAJOR_VERSION="2.x" \
     ELASTICSEARCH_VER="2.4.0"
 
-# Copy Ansible Related Files
-COPY config/ansible/ /
-
 # Run Ansible playbook
 RUN ansible-playbook -i "localhost," -c local /playbook.yml \
   --extra-vars "elasticsearch_major_version=$ELASTICSEARCH_MAJOR_VERSION \
   elasticsearch_ver=$ELASTICSEARCH_VER" && \
-  apt-get -y clean && \
-  apt-get -y autoremove && \
-  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+  rm -rf /tmp/* && \
+  rm -rf /var/cache/apk/*
 
 ENV PATH /usr/share/elasticsearch/bin:$PATH
-
-WORKDIR /usr/share/elasticsearch
 
 # Copy Docker Entrypoint
 COPY docker-entrypoint.sh /

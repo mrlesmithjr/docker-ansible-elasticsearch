@@ -1,6 +1,7 @@
 Repository Information
 ======================
-Builds a [Docker] container running [Elasticsearch] ready for use. Provisioning provided via [Ansible].
+Builds a [Docker] container running [Elasticsearch] ready for use.  
+Provisioning provided via [Ansible].
 
 How-To
 ------
