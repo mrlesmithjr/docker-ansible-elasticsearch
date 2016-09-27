@@ -1,42 +1,17 @@
 Repository Information
 ======================
 Builds a [Docker] container running [Elasticsearch] ready for use.  
-Provisioning provided via [Ansible].
+Provisioning provided via [Ansible]. Also includes plugins installed.
 
-How-To
-------
-Build
-```
-docker build -t ansible-elasticsearch .
-```
+Uses the upstream elasticsearch repository for the base image but installs
+plugins defined in `config/ansible/es_plugin_vars.yml`
 
-Consume
-
-`Default`
 ```
-docker run -d -p 9200:9200 mrlesmithjr/elasticsearch
-```
-`Define volume for persistent storage`
-```
-docker run -d -v $PWD/.data:/usr/share/elasticsearch/data -p 9200:9200 mrlesmithjr/elasticsearch
-```
-
-Defining startup values
-
-`Define node name`
-```
-docker run -d -p 9200:9200 mrlesmithjr/elasticsearch -Des.node.name="node0"
-```
-`Define cluster name`
-```
-docker run -d -p 9200:9200 mrlesmithjr/elasticsearch -Des.cluster.name="docker"
-```
-
-Installing Elasticsearch plugins
-
-`royrusso/elasticsearch-HQ`
-```
-docker exec containername plugin install royrusso/elasticsearch-HQ
+---
+es_plugins:
+  - 'license'
+  - 'mobz/elasticsearch-head'
+  - 'royrusso/elasticsearch-HQ'
 ```
 
 License

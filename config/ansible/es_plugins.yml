@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  become: true
+  connection: local
+  vars_files:
+    - /es_plugin_vars.yml
+  tasks:
+    - name: Installing ES Plugins
+      elasticsearch_plugin:
+        name: "{{ item }}"
+        state: "present"
+      with_items: '{{ es_plugins }}'

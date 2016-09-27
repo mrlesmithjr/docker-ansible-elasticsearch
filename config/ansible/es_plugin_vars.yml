@@ -1,0 +1,5 @@
+---
+es_plugins:
+  - 'license'
+  - 'mobz/elasticsearch-head'
+  - 'royrusso/elasticsearch-HQ'
