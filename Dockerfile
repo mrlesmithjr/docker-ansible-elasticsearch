@@ -1,4 +1,4 @@
-FROM mrlesmithjr/elasticsearch:alpine-2.4.0
+FROM mrlesmithjr/elasticsearch:2.4.1
 
 MAINTAINER Larry Smith Jr. <mrlesmithjr@gmail.com>
 
