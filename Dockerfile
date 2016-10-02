@@ -7,7 +7,7 @@ COPY config/ansible/ /
 
 # Define Elasticsearch version to install
 ENV ELASTICSEARCH_MAJOR_VERSION="2.x" \
-    ELASTICSEARCH_VER="2.4.0"
+    ELASTICSEARCH_VER="2.4.1"
 
 # Run Ansible playbook
 RUN ansible-playbook -i "localhost," -c local /playbook.yml \
