@@ -4,7 +4,7 @@
   become: true
   vars:
     elasticsearch_dl_file: 'elasticsearch-{{ elasticsearch_ver }}.tar.gz'
-    elasticsearch_url: 'https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/{{ elasticsearch_ver }}'
+    elasticsearch_url: 'https://artifacts.elastic.co/downloads/elasticsearch'
     gosu_ver: '1.9'
   tasks:
     - name: Updating APK Cache
