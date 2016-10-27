@@ -1,4 +1,4 @@
-FROM mrlesmithjr/elasticsearch:2.4.1
+FROM mrlesmithjr/elasticsearch:5.0.0
 
 MAINTAINER Larry Smith Jr. <mrlesmithjr@gmail.com>
 
